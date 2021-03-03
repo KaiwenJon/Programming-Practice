@@ -5,6 +5,7 @@
 
 #include "selectionSort.h"
 #include "bubbleSort.h" 
+#include "insertionSort.h"
 
 typedef int DataType;
 
@@ -36,7 +37,8 @@ int main(int argc, char** argv) {
 	
 //	qsort((void *)array, num, sizeof(array[0]), compare);
 //	selectionSort(array, num);
-	bubbleSort(array, num);
+//	bubbleSort(array, num);
+	insertionSort(array, num);
 	
 	
 	for(unsigned i = 0; i < num; i++)
@@ -44,4 +46,5 @@ int main(int argc, char** argv) {
 	 printf(" %d\t", array[i]);
 	}
 	delete[] array;
+	system("PAUSE");
 }
