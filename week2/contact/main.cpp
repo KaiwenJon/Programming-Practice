@@ -36,24 +36,57 @@ int compareAddress(const void *a, const void *b)
 
 int main(void)
 {
-    // Generate the phonebook.
-    std::cout << "Generating Phonebook...." << std ::endl;
     int num = 100;
     Account *phonebook = new Account[num];
-    srand((unsigned)time(NULL));
+    ///////////////////////////////////////// Generate the phonebook./////////////////////////////////////
+    // std::cout << "Generating Phonebook...." << std ::endl;
+    // srand((unsigned)time(NULL));
+    // for (int i = 0; i < num; i++)
+    // {
+    //     printf("Account %i's name:\t", i);
+    //     genRandomName(10, phonebook[i].name);
+    //     // Sleep(1000);
+    //     printf("Account %i's phone:\t", i);
+    //     genRandomPhone(10, phonebook[i].phone);
+    //     // Sleep(1000);
+    //     printf("Account %i's address:\t", i);
+    //     genRandomAddr(30, phonebook[i].address);
+    //     // Sleep(1000);
+    //     printf("--------\n");
+    // }
+    // Save the PhoneBook to file.
+    // FILE *outfile;
+    // outfile = fopen("phonebook.dat", "w");
+    // if (outfile == NULL)
+    // {
+    //     fprintf(stderr, "\nError opend file\n");
+    //     exit(1);
+    // }
+    // for (int i = 0; i < num; i++)
+    // {
+    //     fwrite(&phonebook[i], sizeof(Account), 1, outfile);
+    // }
+
+    // if (fwrite != 0)
+    //     printf("contents to file written successfully !\n");
+    // else
+    //     printf("error writing file !\n");
+
+    // // close file
+    // fclose(outfile);
+    /////////////////////////////////////////// Read phonebook from phonebook.dat ///////////////////////////
+    FILE *infile;
+    infile = fopen("phonebook.dat", "r");
+    if (infile == NULL)
+    {
+        fprintf(stderr, "\nError opening file\n");
+        exit(1);
+    }
     for (int i = 0; i < num; i++)
     {
-        printf("Account %i's name:\t", i);
-        genRandomName(10, phonebook[i].name);
-        // Sleep(1000);
-        printf("Account %i's phone:\t", i);
-        genRandomPhone(10, phonebook[i].phone);
-        // Sleep(1000);
-        printf("Account %i's address:\t", i);
-        genRandomAddr(30, phonebook[i].address);
-        // Sleep(1000);
-        printf("--------\n");
+        fread(&phonebook[i], sizeof(Account), 1, infile);
     }
+    fclose(infile);
 
     char order;
     std::cout << "1 : name\n2 : phone\n3 : address" << std::endl;
