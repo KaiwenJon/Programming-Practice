@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <sys/types.h>
 #include <stdlib.h>
+#include <sys/types.h>
 static __inline char *med3(char *, char *, char *, int (*)(const void *, const void *));
 static __inline void swapfunc(char *, char *, int, int);
 #define min(a, b) (a) < (b) ? a : b
@@ -59,27 +59,42 @@ void mybubbleSort(void *base, size_t n, size_t es, int (*cmp)(const void *, cons
     char *array = (char *)base;
     bool sorted = false;
     SWAPINIT(array, es);
-    for (int round = 1; round < n; round++)
-    {
-        for (char *pm = (char *)array; pm < (char *)array + (n + 1 - round) * es; pm += es)
-        {
-            for ()
-        }
-    }
-
-    for (int pass = 0; pass <= n - 1 && !sorted; ++pass)
+    for (int round = 1; round < n && !sorted; round++)
     {
         sorted = true;
-        for (int arrow = 0; arrow <= n - 2 - pass; ++arrow)
+        for (char *pm = (char *)array; pm < (char *)array + (n - round) * es; pm += es)
         {
-            // std::cout << swaptype << std::endl;
-            if (cmp((char *)array + arrow * es, (char *)array + es) > 0)
+            if (cmp(pm, pm + es) > 0)
             {
-                swap(array + arrow * es, array + es);
-                std::cout << "swapped" << std::endl;
+                swap(pm, pm + es);
                 sorted = false;
             }
         }
+    }
+}
+
+void myselectionSort(void *base, size_t n, size_t es, int (*cmp)(const void *, const void *))
+{
+    int swaptype;
+    char *array = (char *)base;
+    SWAPINIT(array, es);
+    for (int round = 1; round < n; round++)
+    {
+        char *pointerOfLargest = array;
+        for (char *pm = (char *)array; pm < (char *)array + (n - round + 1) * es; pm += es)
+        {
+            if (cmp(pm, pointerOfLargest) >= 0)
+            {
+                pointerOfLargest = pm;
+            }
+        }
+        // std::cout << *(int *)pointerOfLargest << "and" << *(int *)(array + (n - round) * es) << "   ";
+        swap(pointerOfLargest, array + (n - round) * es);
+        // for (char *pm = (char *)array; pm < (char *)array + n * es; pm += es)
+        // {
+        //     std::cout << *(int *)pm << "  ";
+        // }
+        // std::cout << std::endl;
     }
 }
 

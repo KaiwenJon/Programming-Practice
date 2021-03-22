@@ -1,9 +1,9 @@
 
+#include "my_sorting_lib.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "my_sorting_lib.h"
 
 int compare(const void *a, const void *b)
 {
@@ -41,9 +41,12 @@ int main(int argc, char **argv)
     printf("\n\n");
 
     //Sorting Algorithm
+
     // myqsort((void *)array, num, sizeof(array[0]), compare);
     // mybubbleSort((void *)array, num, sizeof(array[0]), compare);
-    myinsertionSort((void *)array, num, sizeof(array[0]), compare);
+    // myinsertionSort((void *)array, num, sizeof(array[0]), compare);
+    myselectionSort((void *)array, num, sizeof(array[0]), compare);
+
     std::cout << "After Sorting....\n";
     //Sorted Array
     for (unsigned i = 0; i < num; i++)
