@@ -13,26 +13,27 @@ void printVector(vector<int> element)
         cout << element[i] << " ";
     }
 }
-
-void backtrack(vector<vector<int>> &res, vector<int> &output, int head, int len)
+void backtrack(vector<vector<int>> &res, vector<int> &output, int head, vector<int> &array, int k)
 {
-    if (head == len)
+    if (k == 0)
     {
         res.push_back(output);
-        return;
+        // cout << endl;
     }
-    for (int i = head; i < len; i++)
+    for (int i = head; i < array.size(); i++)
     {
-        swap(output[i], output[head]);
-        backtrack(res, output, head + 1, len);
-        swap(output[i], output[head]);
+        // cout << head;
+        output.push_back(array[i]);
+        backtrack(res, output, i + 1, array, k - 1);
+        output.pop_back();
     }
 }
 
-vector<vector<int>> permute(vector<int> &nums)
+vector<vector<int>> combine(vector<int> array, int k)
 {
     vector<vector<int>> res;
-    backtrack(res, nums, 0, (int)nums.size());
+    vector<int> output;
+    backtrack(res, output, 0, array, k);
     return res;
 }
 
@@ -40,9 +41,9 @@ int main(int argc, char **argv)
 {
     // Construct the objects
     vector<int> numbers;
-
-    int n = 4;
-    cout << "Permutation: " << endl;
+    int n = 5;
+    int k = 3;
+    cout << "Combination: " << k << " out of " << n << " objects " << endl;
     cout << "objects array: ";
     for (int i = 0; i < n; i++)
     {
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
     }
     cout << endl;
 
-    vector<vector<int>> result = permute(numbers);
+    vector<vector<int>> result = combine(numbers, k);
     for (int i = 0; i < result.size(); i++)
     {
         vector<int> element = result[i];
